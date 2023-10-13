@@ -1,7 +1,4 @@
-package com.example.mail.model.repositories;
-import com.example.mail.model.domain.PostalItem;
-import jakarta.transaction.Transactional;
-import org.springframework.data.repository.PagingAndSortingRepository;
+package com.example.mail.model.repository;
 import org.springframework.stereotype.Repository;
 
 import com.example.mail.model.domain.MailDepartment;

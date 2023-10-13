@@ -1,12 +1,18 @@
 package com.example.mail.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.extern.jackson.Jacksonized;
 
 import java.util.List;
 
 @Entity
 @Table (name = "\"MailDepartments\"")
-
 public class MailDepartment {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
@@ -21,14 +27,49 @@ public class MailDepartment {
     @OneToMany (mappedBy = "mailDepartment")
     private List<PostalItem> postalItemList;
 
+    @OneToMany (mappedBy = "mailDepartment")
+    @JsonIgnore
+    private List<MovementHistory> movementHistoryList;
+
+    public List<MovementHistory> getMovementHistoryList() {
+        return  movementHistoryList;
+    }
+
     protected MailDepartment() {}
 
     public  MailDepartment(String index, String name, String address) {
-        this.id = id;
         this.index = index;
         this.name = name;
         this.address = address;
     }
+
+    public long getId () {
+        return id;
+    }
+
+    public String getIndex () {
+        return index;
+    }
+
+    public void setIndex (String index) {
+        this.index = index;
+    }
+
+    public String getName () {
+        return name;
+    }
+
+    public void setName (String name) {
+        this.name = name;
+    }
+    public String getAddress () {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return id + " " + index + " " + name + " " + address;

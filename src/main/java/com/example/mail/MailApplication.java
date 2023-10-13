@@ -2,8 +2,8 @@ package com.example.mail;
 
 import com.example.mail.model.domain.MailDepartment;
 import com.example.mail.model.domain.PostalItem;
-import com.example.mail.model.services.MailDepartmentService;
-import com.example.mail.model.services.PostalItemService;
+import com.example.mail.model.service.MailDepartmentService;
+import com.example.mail.model.service.PostalItemService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

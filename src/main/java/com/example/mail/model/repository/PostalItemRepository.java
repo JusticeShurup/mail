@@ -1,6 +1,5 @@
-package com.example.mail.model.repositories;
+package com.example.mail.model.repository;
 
-import com.example.mail.model.domain.MailDepartment;
 import com.example.mail.model.domain.PostalItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 
