@@ -1,18 +1,14 @@
 package com.example.mail.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.extern.jackson.Jacksonized;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table (name = "\"MailDepartments\"")
+
 public class MailDepartment {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)

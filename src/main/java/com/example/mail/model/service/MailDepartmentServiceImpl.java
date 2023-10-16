@@ -24,6 +24,12 @@ public class MailDepartmentServiceImpl implements MailDepartmentService {
     public Optional<MailDepartment> getMailDepartmentById(long id) {
         return mailDepartmentRepository.findById(id);
     }
+
+    @Override
+    public Optional<MailDepartment> getMailDepartmentByIndex(String index) {
+        return Optional.ofNullable(mailDepartmentRepository.getMailDepartmentByIndex(index));
+    }
+
     @Override
     public List<MailDepartment> getMailDepartmentList() {
         return mailDepartmentRepository.findAll();

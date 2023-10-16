@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -35,9 +36,13 @@ public class MailController {
         try {
             ObjectMapper jsonFormater = new ObjectMapper();
             PostalItem postalItem = jsonFormater.readValue(payload, PostalItem.class);
-            postalItemService.save(postalItem);
+
+            if (mailDepartmentService.getMailDepartmentByIndex(postalItem.getRecipientIndex()).isEmpty()) {
+                return new ResponseEntity<>("Mail Department doesn't exists", HttpStatus.BAD_REQUEST);
+            }
 
             MovementHistory movementHistory = new MovementHistory(postalItem.getMailDepartment(), postalItem, MovementType.REGISTERED);
+            postalItemService.save(postalItem);
             movementHistoryService.save(movementHistory);
         }
         catch (Exception ex) {
@@ -64,11 +69,9 @@ public class MailController {
                 movementHistoryTransferMailDepartment = new MovementHistory(transerMailDepartment, postalItem, MovementType.REDIRECTED);
             }
             else {
-                System.out.println("Письмо было доставлено");
                 movementHistoryTransferMailDepartment = new MovementHistory(transerMailDepartment, postalItem, MovementType.DELIVERED);
-                postalItem.setDelivered(true);
-                postalItem.setMailDepartment(transerMailDepartment);
             }
+            postalItem.setMailDepartment(transerMailDepartment);
 
 
             movementHistoryService.save(movementHistoryCurrentMailDepartment);
@@ -81,6 +84,43 @@ public class MailController {
         }
 
         return new ResponseEntity<>("Postal item is transfered", HttpStatus.OK);
+    }
+    @PostMapping("/takePostalItemById")
+    public ResponseEntity<String> takePostalItemById(@RequestParam(name = "postalItemId") long postalItemId) {
+        try {
+            PostalItem postalItem = postalItemService.getPostalItemById(postalItemId).get();
+
+            if (!postalItem.getRecipientIndex().equals(postalItem.getMailDepartment().getIndex())) {
+                return new ResponseEntity<>("The postal item has not been delivered yet", HttpStatus.BAD_REQUEST);
+            }
+
+            if (postalItem.isTaken()) {
+                return new ResponseEntity<>("The postal item has already been collected", HttpStatus.BAD_REQUEST);
+            }
+
+            postalItem.setTaken(true);
+            MovementHistory movementHistory = new MovementHistory(postalItem.getMailDepartment(), postalItem, MovementType.TAKEN);
+            movementHistoryService.save(movementHistory);
+        }
+        catch (Exception ex) {
+            return  new ResponseEntity<>(ex.toString(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>("Postal item successfully taken", HttpStatus.OK);
+    }
+
+    @GetMapping("/getPostalItemMovementHistoryById")
+    public ResponseEntity<String> getPostalItemMovementHistoryById(@RequestParam (name = "postalItemId") Long postalItemId) {
+        try {
+            PostalItem postalItem = postalItemService.getPostalItemById(postalItemId).get();
+            List<MovementHistory> movementHistoryList = postalItem.getMovementHistoryList();
+
+            ObjectMapper jsonFormater = new ObjectMapper();
+            String answer = jsonFormater.writeValueAsString(movementHistoryList);
+            return new ResponseEntity<>(answer, HttpStatus.OK);
+        }
+        catch (Exception ex) {
+            return  new ResponseEntity<>(ex.toString(), HttpStatus.BAD_REQUEST);
+        }
     }
 
 

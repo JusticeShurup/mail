@@ -10,5 +10,7 @@ public interface MailDepartmentService {
 
 
     Optional<MailDepartment> getMailDepartmentById(long id);
+
+    Optional<MailDepartment> getMailDepartmentByIndex(String index);
     List<MailDepartment> getMailDepartmentList();
 }
