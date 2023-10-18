@@ -9,8 +9,9 @@ function Header() {
                 <nav>
                     <ul className="nav__links">
                         <li><Link to="/">Главная</Link></li>
-                        <li><Link to="/departments">Отделения</Link></li>
-                        <li><Link to="/">Отправления</Link></li>
+                        <li><Link to="/mailDepartments">Отделения</Link></li>
+                        <li><Link to="/postalItems">Отправления</Link></li>
+                        <li><Link to="/historyMovement">История перемещений</Link></li>
                     </ul>
                 </nav>
             </header>
