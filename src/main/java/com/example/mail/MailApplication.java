@@ -29,8 +29,6 @@ public class MailApplication {
 			mailDepartmentService.save(mailDepartment1);
 			mailDepartmentService.save(mailDepartment2);
 			*/
-			MailDepartment mailDepartment2 = new MailDepartment("444555", "Почта под домом", "Magnitogorsk, Karla Marksa 150");
-			PostalItem postalItem1 = new PostalItem("Письмо", "444555", "Magnitogorsk, Lenina 133", "Ivan", mailDepartment2, false);
 
 			/*
 			postalItemService.save(postalItem1);
@@ -40,9 +38,7 @@ public class MailApplication {
 				System.out.println("MailDepartment Detail:" + mailDepartment.toString());
 			}
 			*/
-			var mapper = new ObjectMapper();
-			var str = mapper.writeValueAsString(postalItem1);
-			System.out.println(str);
+
 		};
 	}
 

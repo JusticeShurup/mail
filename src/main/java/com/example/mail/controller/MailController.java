@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
+@CrossOrigin
+
 public class MailController {
 
     @Autowired
@@ -29,6 +31,20 @@ public class MailController {
 
     @Autowired
     private MovementHistoryServiceImpl movementHistoryService;
+
+    private ObjectMapper jsonFormater = new ObjectMapper();
+
+    @GetMapping("/getMailDepartments")
+    public  ResponseEntity<String> getMailDepartments() throws IOException {
+        try {
+            List<MailDepartment> mailDepartments = mailDepartmentService.getMailDepartmentList();
+            String answer = jsonFormater.writeValueAsString(mailDepartments);
+            return new ResponseEntity<>(answer, HttpStatus.OK);
+        }
+        catch (Exception ex) {
+            return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 
     @PostMapping("/registryPostalItem")
     public ResponseEntity<String> registryPostalItem(@RequestBody String payload) throws IOException {
