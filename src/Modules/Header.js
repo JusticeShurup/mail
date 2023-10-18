@@ -4,7 +4,7 @@ import "./Header.css"
 function Header() {
     return (
         <div className="header-container">
-            <img className="image" src="././img/mail (1).png"></img>
+            <img className="image" src="././img/mail.png"></img>
             <header>
                 <nav>
                     <ul className="nav__links">
