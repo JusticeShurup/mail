@@ -24,8 +24,8 @@
     padding: 20px;
     border-radius: 12px;
     background-color: white;
-    width: 400px;
-    height: 400px;
+    width: 25%;
+    height: 50%;
     transform: scale(0.5);
     transition: 0.4s all;
 }
@@ -33,3 +33,91 @@
 .modal__content.active {
     transform: scale(1);
 }
+
+.modal h1 {
+    font-size: 20px;
+    text-align: center;
+}
+
+.modal form {
+    max-width: 400px;
+    padding: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-group {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    outline: 0;
+    border: 1px solid #fff;
+    color: #fff;
+    background: transparent;
+    font-size: 15px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.input-group label {
+    height: 50%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    padding: 10px;
+    color: #fff;
+    cursor: text;
+    background-color: rgba(0, 0, 0, 0);
+    transition: 0.2s;
+    font-size: 16px;
+}
+
+button {
+    width: 107%;
+    padding: 10px;
+    transition: 0.3s;
+}
+
+button:hover {
+    font-size: large;
+    
+}
+
+.select-item {
+    padding-bottom: 10px;
+    width: 107%;
+
+}
+
+.select-item select {
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.select-item option {
+    text-align: center;
+}
+
+.select-item label {
+    height: 100%;
+    position: relative;
+    top: -50px;
+    left: 0px;
+    padding: 10px;
+    color: #fff;
+    cursor: text;
+    background-color: rgba(0, 0, 0, 0);
+    transition: 0.2s;
+    font-size: 16px;
+}
+
+.input-group input:focus~label,
+input:valid~label {
+    top: -35px;
+    font-size: 14px;
+}
+
+

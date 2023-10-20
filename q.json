@@ -1,0 +1,13 @@
+{
+    "postalType": "Посылка",
+    "recipientIndex": "444555",
+    "recipientAddress": "Lenina 500",
+    "recipientName": "Абдул",
+    "mailDepartment": {
+        "id": 202,
+        "index": "444555",
+        "name": "First Department",
+        "address": "Magnitogorsk, Lenina 133"
+    },
+    "taken": false
+}

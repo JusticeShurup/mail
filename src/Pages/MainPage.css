@@ -6,7 +6,7 @@
     justify-content: center;
 }
 
-.mainpage button {
+.modal-button {
     background-color: gray;
     color: white;
     transition: 0.3s;
@@ -15,7 +15,7 @@
     font-size: 25px;
 }
 
-.mainpage button:hover {
+.modal-button:hover {
     background-color: black;
     font-size: 40px;
 }
