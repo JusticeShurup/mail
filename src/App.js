@@ -9,7 +9,7 @@ import {
 
 import MainPage from "./Pages/MainPage"
 import MailDepartmentsPage from "./Pages/MailDepartmentsPage"
-import PostalItems from "./Pages/PostalItemsPage"
+import PostalItemsPage from "./Pages/PostalItemsPage"
 import HistoryMovementsPage from "./Pages/HistoryMovementsPage"
 
 
@@ -21,7 +21,7 @@ function App() {
         <Routes>
           <Route exact path ="/"  element={<MainPage/>}></Route>
           <Route exact path="/mailDepartments" element={<MailDepartmentsPage/>}></Route>
-          <Route exact path="/postalItems" element={<PostalItems/>}></Route>
+          <Route exact path="/postalItems" element={<PostalItemsPage/>}></Route>
           <Route exact path="/historyMovements" element={<HistoryMovementsPage/>}></Route>
         </Routes>
       </div>

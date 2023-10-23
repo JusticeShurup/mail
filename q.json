@@ -1,8 +1,8 @@
 {
-    "postalType": "Посылка",
+    "postalType": "LETTER",
     "recipientIndex": "444555",
-    "recipientAddress": "Lenina 500",
-    "recipientName": "Абдул",
+    "recipientAddress": "Voroshilova 500",
+    "recipientName": "Abdul",
     "mailDepartment": {
         "id": 202,
         "index": "444555",

@@ -1,5 +1,5 @@
 import "./MainPage.css"
-import Modal from "../Modules/Modal";
+import RegistryPostalItemModal from "../Modules/RegistryPostalItemModal";
 import { useState } from "react";
 function MainPage() {
     const [modalActive, setModalActive] = useState(false)
@@ -8,7 +8,7 @@ function MainPage() {
     return (
         <div className="mainpage">
             <button className="modal-button" onClick={() => setModalActive(true)}>Зарегистрировать отправление</button>
-            <Modal active={modalActive} setActive={setModalActive}/>
+            <RegistryPostalItemModal active={modalActive} setActive={setModalActive}/>
         </div>
     );
 };

@@ -1,8 +1,14 @@
-import MailDepartmentCard from '../Modules/MailDepartmentsPage/MailDepartmentCard';
-import React, { useEffect, useState } from 'react';
-import axios from 'axios'
+import './PostalItemsPage.css'
+import PostalItemsInfo from '../Modules/PostalItemsPage/PostalItemsInfo';
+import PostalItemsActions from '../Modules/PostalItemsPage/PostalItemsActions';
 
 const PostalItemsPage = () => {
-    return;
+    
+    return (
+        <>
+            <PostalItemsInfo></PostalItemsInfo>
+            <PostalItemsActions></PostalItemsActions>
+        </>
+    );
 };
 export default PostalItemsPage;
