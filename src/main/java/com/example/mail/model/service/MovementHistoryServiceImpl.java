@@ -5,6 +5,8 @@ import com.example.mail.model.repository.MovementHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MovementHistoryServiceImpl implements MovementHistoryService{
 
@@ -14,4 +16,6 @@ public class MovementHistoryServiceImpl implements MovementHistoryService{
     public void save(MovementHistory movementHistory) {
         movementHistoryRepository.save(movementHistory);
     }
+
+
 }

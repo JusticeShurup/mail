@@ -10,17 +10,19 @@ import com.example.mail.model.service.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
-
 public class MailController {
 
     @Autowired
@@ -46,11 +48,13 @@ public class MailController {
         }
     }
 
-    @PostMapping("/registryPostalItem")
+    @RequestMapping(
+            path = "/registryPostalItem",
+            method = RequestMethod.POST
+    )
     public ResponseEntity<String> registryPostalItem(@RequestBody String payload) throws IOException {
         // The payload parameter contains the JSON string from the request body
         try {
-            ObjectMapper jsonFormater = new ObjectMapper();
             PostalItem postalItem = jsonFormater.readValue(payload, PostalItem.class);
 
             if (mailDepartmentService.getMailDepartmentByIndex(postalItem.getRecipientIndex()).isEmpty()) {
@@ -62,11 +66,58 @@ public class MailController {
             movementHistoryService.save(movementHistory);
         }
         catch (Exception ex) {
+            System.out.println(ex.toString());
             return new ResponseEntity<>(ex.toString(), HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity<>("Postal item is registered", HttpStatus.OK);
     }
+
+    @GetMapping("/getPostalItems")
+    public  ResponseEntity<String> getPostalItems() throws IOException {
+        try {
+            List<PostalItem> postalItems = postalItemService.getPostalItemList();
+            String answer = jsonFormater.writeValueAsString(postalItems);
+            return new ResponseEntity<>(answer, HttpStatus.OK);
+        }
+        catch (Exception ex) {
+            return  new ResponseEntity<>(ex.toString(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/getPostalItemMovementHistory")
+    public ResponseEntity<String> getPostalItemMovementHistory(@RequestParam(name = "postalItemId") int postalItemId) {
+        try {
+            Optional<PostalItem> postalItem = postalItemService.getPostalItemById(postalItemId);
+            if (postalItem.isEmpty()) {
+                return new ResponseEntity<>("Postal item not found", HttpStatus.BAD_REQUEST);
+            }
+
+            String movementHistory = jsonFormater.writeValueAsString(postalItem.get().getMovementHistoryList());
+
+            return new ResponseEntity<>(movementHistory, HttpStatus.OK);
+        }
+        catch (Exception ex) {
+            return  new ResponseEntity<>(ex.toString(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/getPostalItemsMovementHistory")
+    public ResponseEntity<String> getPostalItemsMovementHistory() {
+        try {
+            List<PostalItem> postalItems = postalItemService.getPostalItemList();
+            ArrayList<List<MovementHistory>> movementHistories = new ArrayList<List<MovementHistory>>();
+            for (var postalItem : postalItems) {
+                movementHistories.add(postalItem.getMovementHistoryList());
+            }
+            return new ResponseEntity<>(jsonFormater.writeValueAsString(movementHistories).toString(), HttpStatus.OK);
+        }
+        catch (Exception ex)
+        {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
     @PostMapping("/transferPostalItemToMailDepartment")
     public ResponseEntity<String> transferPostalItemToMailDepartment(@RequestParam(name = "postalItemId") long postalItemId, @RequestParam(name = "mailDepartmentId") long mailDepartmentId) {
