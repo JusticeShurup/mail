@@ -1,13 +1,102 @@
-{
-    "postalType": "LETTER",
-    "recipientIndex": "444555",
-    "recipientAddress": "Voroshilova 500",
-    "recipientName": "Abdul",
-    "mailDepartment": {
-        "id": 202,
-        "index": "444555",
-        "name": "First Department",
-        "address": "Magnitogorsk, Lenina 133"
-    },
-    "taken": false
-}
+[
+    [
+        {
+            "id": 653,
+            "mailDepartment": {
+                "id": 202,
+                "index": "444555",
+                "name": "First Department",
+                "address": "Magnitogorsk, Lenina 133"
+            },
+            "postalItem": {
+                "id": 652,
+                "postalType": "LETTER",
+                "recipientIndex": "445554",
+                "recipientAddress": "Voroshilova 500",
+                "recipientName": "Abdul",
+                "taken": false,
+                "mailDepartment": {
+                    "id": 203,
+                    "index": "443553",
+                    "name": "Почта под домом",
+                    "address": "Magnitogorsk, Karla Marksa 150"
+                }
+            },
+            "movementType": "DEPARTED"
+        },
+        {
+            "id": 652,
+            "mailDepartment": {
+                "id": 202,
+                "index": "444555",
+                "name": "First Department",
+                "address": "Magnitogorsk, Lenina 133"
+            },
+            "postalItem": {
+                "id": 652,
+                "postalType": "LETTER",
+                "recipientIndex": "445554",
+                "recipientAddress": "Voroshilova 500",
+                "recipientName": "Abdul",
+                "taken": false,
+                "mailDepartment": {
+                    "id": 203,
+                    "index": "443553",
+                    "name": "Почта под домом",
+                    "address": "Magnitogorsk, Karla Marksa 150"
+                }
+            },
+            "movementType": "REGISTERED"
+        },
+        {
+            "id": 654,
+            "mailDepartment": {
+                "id": 203,
+                "index": "443553",
+                "name": "Почта под домом",
+                "address": "Magnitogorsk, Karla Marksa 150"
+            },
+            "postalItem": {
+                "id": 652,
+                "postalType": "LETTER",
+                "recipientIndex": "445554",
+                "recipientAddress": "Voroshilova 500",
+                "recipientName": "Abdul",
+                "taken": false,
+                "mailDepartment": {
+                    "id": 203,
+                    "index": "443553",
+                    "name": "Почта под домом",
+                    "address": "Magnitogorsk, Karla Marksa 150"
+                }
+            },
+            "movementType": "REDIRECTED"
+        }
+    ],
+    [
+        {
+            "id": 702,
+            "mailDepartment": {
+                "id": 203,
+                "index": "443553",
+                "name": "Почта под домом",
+                "address": "Magnitogorsk, Karla Marksa 150"
+            },
+            "postalItem": {
+                "id": 702,
+                "postalType": "LETTER",
+                "recipientIndex": "444555",
+                "recipientAddress": "Voroshilova 100",
+                "recipientName": "Magomed",
+                "taken": false,
+                "mailDepartment": {
+                    "id": 203,
+                    "index": "443553",
+                    "name": "Почта под домом",
+                    "address": "Magnitogorsk, Karla Marksa 150"
+                }
+            },
+            "movementType": "REGISTERED"
+        }
+    ]
+]
