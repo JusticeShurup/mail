@@ -7,6 +7,8 @@ const PostalItemsInfo = () => {
 
     const baseURL = "http://localhost:8080"
 
+    
+
     useEffect(() => {
         axios.get(baseURL + '/getPostalItems').then((response) => {
             setPostalItems(Array.from(response.data));

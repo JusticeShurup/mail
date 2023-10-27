@@ -11,6 +11,7 @@ import MainPage from "./Pages/MainPage"
 import MailDepartmentsPage from "./Pages/MailDepartmentsPage"
 import PostalItemsPage from "./Pages/PostalItemsPage"
 import HistoryMovementsPage from "./Pages/HistoryMovementsPage"
+import LoginPage from "./Pages/LoginPage";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/mailDepartments" element={<MailDepartmentsPage/>}></Route>
           <Route exact path="/postalItems" element={<PostalItemsPage/>}></Route>
           <Route exact path="/historyMovements" element={<HistoryMovementsPage/>}></Route>
+          <Route exact path='/login' element={<LoginPage/>}></Route>
         </Routes>
       </div>
   );
