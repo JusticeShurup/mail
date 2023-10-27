@@ -20,7 +20,7 @@ const PostalItemsActions = () => {
             }
         };
         
-        axios.post(baseURL + '/transferPostalItemToMailDepartment?postalItemId=' + postalItemId 
+        axios.post(baseURL + '/mail/transferPostalItemToMailDepartment?postalItemId=' + postalItemId 
             + '&mailDepartmentId=' + mailDepartmentId)
         .then(function (response) {
             console.log(response)
@@ -34,7 +34,7 @@ const PostalItemsActions = () => {
 
 
     useEffect(() => {
-        axios.get(baseURL + '/getPostalItems').then((response) => {
+        axios.get(baseURL + '/mail/getPostalItems').then((response) => {
             setPostalItems(Array.from(response.data));
             console.log(response.data);
         }).catch((e) => {

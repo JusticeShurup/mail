@@ -10,7 +10,7 @@ const PostalItemsInfo = () => {
     
 
     useEffect(() => {
-        axios.get(baseURL + '/getPostalItems').then((response) => {
+        axios.get(baseURL + '/mail/getPostalItems').then((response) => {
             setPostalItems(Array.from(response.data));
             console.log(response.data);
         }).catch((e)=>{
@@ -20,7 +20,7 @@ const PostalItemsInfo = () => {
 
     function takePostalItem(postalItem) {
         postalItem.taken = (postalItem.taken === false && postalItem.recipientIndex === postalItem.mailDepartment.index)
-        axios.post(baseURL + '/takePostalItemById?postalItemId=' + postalItem.id).then((response) => {
+        axios.post(baseURL + '/mail/takePostalItemById?postalItemId=' + postalItem.id).then((response) => {
             console.log(response.data);
         }).catch((e)=>{
             console.log(e);

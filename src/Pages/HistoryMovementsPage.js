@@ -11,7 +11,7 @@ const HistoryMovementsPage = () => {
 
     useEffect(() => {
         if (loaded) return;
-        axios.get(baseURL + '/getPostalItemsMovementHistory').then((response) => {
+        axios.get(baseURL + '/mail/getPostalItemsMovementHistory').then((response) => {
             let matrix = [];
             for (var i in response.data) {
                 let massiv = Array.from(response.data[i]);

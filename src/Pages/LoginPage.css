@@ -1,9 +1,13 @@
 .login-page {
     height: 100vh;
     display: flex;
+
     justify-content: center;
-    align-items: center;
     text-align: center;
+    align-items: center;
+}
+
+.login-page h2 {
 }
 
 .login-form {
@@ -19,8 +23,27 @@
     align-items: center;
 }
 
-.login-form input {
+.input-box {
     width: 320px;
-    margin: 30px;
+    margin: 0 px;
     padding: 10px;
+    display: inline-block;
+}
+
+.input-box input {
+    width: 280px;
+    padding: 10px;
+    background-color: rgba(0,0,0,0);
+
+}
+
+.input-box label {
+    font-size: 25px;
+    background-color: rgba(0,0,0,0);
+}
+
+.login-page-button {
+    width: 305px;
+    padding: 5px;
+    margin: 40px 0px 0px 0px;
 }

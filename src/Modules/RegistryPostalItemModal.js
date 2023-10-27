@@ -32,7 +32,7 @@ const RegistryPostalItemModal = ({active, setActive}) => {
             }
         };
         
-        axios.post(baseURL + '/registryPostalItem', JSON.stringify(PostalItem), customConfig)
+        axios.post(baseURL + '/mail/registryPostalItem', JSON.stringify(PostalItem), customConfig)
         .then(function (response) {
             console.log(response)
         })
@@ -44,7 +44,7 @@ const RegistryPostalItemModal = ({active, setActive}) => {
 
 
     useEffect(() => {
-        axios.get(baseURL + "/getMailDepartments").then((response) => {
+        axios.get(baseURL + "/mail/getMailDepartments").then((response) => {
             setMailDepartmens(Array.from(response.data));
             console.log(baseURL);
         }).catch((e)=>{
