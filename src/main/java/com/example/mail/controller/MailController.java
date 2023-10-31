@@ -23,7 +23,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/mail")
+@RequestMapping("/api/v1/mail")
 public class MailController {
 
     @Autowired
