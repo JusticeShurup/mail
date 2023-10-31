@@ -8,7 +8,7 @@ import axios from 'axios';
 const RegistryPostalItemModal = ({active, setActive}) => {
     const [mailDepartments, setMailDepartmens] = useState([{}])
     
-    const baseURL = "http://localhost:8080"
+    const baseURL = "http://localhost:8080/api/v1"
     
     
 

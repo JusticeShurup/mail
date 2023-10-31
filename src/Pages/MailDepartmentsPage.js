@@ -5,7 +5,7 @@ import axios from 'axios'
 const MailDepartmentsPage = () => {
     const [mailDepartments, setMailDepartmens] = useState([{}])
 
-    const baseURL = "http://localhost:8080"
+    const baseURL = "http://localhost:8080/api/v1"
 
     React.useEffect(() => {
         axios.get(baseURL + '/mail/getMailDepartments').then((response) => {

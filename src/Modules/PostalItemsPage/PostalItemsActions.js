@@ -6,7 +6,7 @@ const PostalItemsActions = () => {
     const [postalItems, setPostalItems] = useState([{}])
     const [mailDepartments, setMailDepartmens] = useState([{}])
 
-    const baseURL = "http://localhost:8080"
+    const baseURL = "http://localhost:8080/api/v1"
 
     function transferPostalItem(e) {
         e.preventDefault();   
@@ -43,7 +43,7 @@ const PostalItemsActions = () => {
     }, []);
 
     useEffect(() => {
-        axios.get(baseURL + "/getMailDepartments").then((response) => {
+        axios.get(baseURL + "/mail/getMailDepartments").then((response) => {
             setMailDepartmens(Array.from(response.data));
             console.log(baseURL);
         }).catch((e)=>{

@@ -12,6 +12,7 @@ function Header() {
                         <li><Link to="/mailDepartments">Отделения</Link></li>
                         <li><Link to="/postalItems">Отправления</Link></li>
                         <li><Link to="/historyMovements">История перемещений</Link></li>
+                        <li><Link to="/login">Войти</Link></li>
                     </ul>
                 </nav>
             </header>
