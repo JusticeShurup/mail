@@ -4,13 +4,13 @@ import axios from 'axios';
 import './LoginPage.css'
 import LoginModule from '../Modules/LoginPage/LoginModule';
 import RegistrationModule from '../Modules/LoginPage/RegistrationModule';
+import { axiosInstance } from '../api.config';
 
 export default function LoginPage() {
     const [isLoginning, setLoginning] = useState(true);
-    const BASEURL = 'http://localhost:8080/api/v1/auth';
 
     function tryAuthorize(e) {
-        axios.post(BASEURL + '/authenticate', {
+        axiosInstance.post('auth/authenticate', {
             username: e.target[0].value,
             password: e.target[1].value
         }).then( function(response) {
@@ -21,7 +21,7 @@ export default function LoginPage() {
     }
 
     function tryRegister(e) {
-        axios.post(BASEURL + '/register', {
+        axiosInstance.post('auth/register', {
             firstname: e.target[0].value,
             lastname: e.target[1].value,
             username: e.target[2].value,

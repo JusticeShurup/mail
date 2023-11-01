@@ -1,14 +1,14 @@
 import MailDepartmentCard from '../Modules/MailDepartmentsPage/MailDepartmentCard';
 import React, { useEffect, useState } from 'react';
+import { axiosInstance } from '../api.config';
+
 import axios from 'axios'
 
 const MailDepartmentsPage = () => {
     const [mailDepartments, setMailDepartmens] = useState([{}])
 
-    const baseURL = "http://localhost:8080/api/v1"
-
     React.useEffect(() => {
-        axios.get(baseURL + '/mail/getMailDepartments').then((response) => {
+        axiosInstance.get('/mail/getMailDepartments').then((response) => {
             setMailDepartmens(Array.from(response.data));
             console.log(response.data);
         }).catch((e)=>{

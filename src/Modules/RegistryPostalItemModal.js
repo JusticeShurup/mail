@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import "./RegistryPostalItemModal.css";
 import axios from 'axios';
+import { axiosInstance } from '../api.config';
 
 
 
 
 const RegistryPostalItemModal = ({active, setActive}) => {
     const [mailDepartments, setMailDepartmens] = useState([{}])
-    
-    const baseURL = "http://localhost:8080/api/v1"
     
     
 
@@ -32,7 +31,7 @@ const RegistryPostalItemModal = ({active, setActive}) => {
             }
         };
         
-        axios.post(baseURL + '/mail/registryPostalItem', JSON.stringify(PostalItem), customConfig)
+        axiosInstance.post('/mail/registryPostalItem', JSON.stringify(PostalItem), customConfig)
         .then(function (response) {
             console.log(response)
         })
@@ -44,11 +43,9 @@ const RegistryPostalItemModal = ({active, setActive}) => {
 
 
     useEffect(() => {
-        axios.get(baseURL + "/mail/getMailDepartments").then((response) => {
+        axiosInstance.get("/mail/getMailDepartments").then((response) => {
             setMailDepartmens(Array.from(response.data));
-            console.log(baseURL);
         }).catch((e)=>{
-            console.log(baseURL)
         })
     },[]);
 

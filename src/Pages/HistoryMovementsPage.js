@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import './HistoryMovementsPage.css'
+import { axiosInstance } from '../api.config';
 
 const HistoryMovementsPage = () => {
     const [postalItemsMovements, setHistoryMovements] = useState([[{}]]);
     const [loaded, setLoaded] = useState(false);
 
-    const baseURL = "http://localhost:8080/api/v1"
-
 
     useEffect(() => {
         if (loaded) return;
-        axios.get(baseURL + '/mail/getPostalItemsMovementHistory').then((response) => {
+        axiosInstance.get('/mail/getPostalItemsMovementHistory').then((response) => {
             let matrix = [];
             for (var i in response.data) {
                 let massiv = Array.from(response.data[i]);

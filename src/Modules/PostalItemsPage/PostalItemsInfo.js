@@ -1,16 +1,14 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import './PostalItemsInfo.css'
+import { axiosInstance } from '../../api.config'
 
 const PostalItemsInfo = () => {
     const [postalItems, setPostalItems] = useState([{}])
-
-    const baseURL = "http://localhost:8080/api/v1"
-
     
 
     useEffect(() => {
-        axios.get(baseURL + '/mail/getPostalItems').then((response) => {
+        axiosInstance.get('/mail/getPostalItems').then((response) => {
             setPostalItems(Array.from(response.data));
             console.log(response.data);
         }).catch((e)=>{
@@ -20,7 +18,7 @@ const PostalItemsInfo = () => {
 
     function takePostalItem(postalItem) {
         postalItem.taken = (postalItem.taken === false && postalItem.recipientIndex === postalItem.mailDepartment.index)
-        axios.post(baseURL + '/mail/takePostalItemById?postalItemId=' + postalItem.id).then((response) => {
+        axiosInstance.post('/mail/takePostalItemById?postalItemId=' + postalItem.id).then((response) => {
             console.log(response.data);
         }).catch((e)=>{
             console.log(e);
