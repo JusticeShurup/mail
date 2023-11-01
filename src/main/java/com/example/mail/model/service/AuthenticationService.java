@@ -1,6 +1,7 @@
 package com.example.mail.model.service;
 
 
+import com.example.mail.model.Enum.Role;
 import com.example.mail.model.domain.AuthenticationResponse;
 import com.example.mail.model.domain.RegisterRequest;
 import com.example.mail.model.domain.AuthenticationRequest;
@@ -24,9 +25,11 @@ public class AuthenticationService {
 
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()
+                .firstname(request.getFirstname())
+                .lastname(request.getLastname())
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(request.getRole())
+                .role(Role.USER)
                 .build();
 
         repository.save(user);

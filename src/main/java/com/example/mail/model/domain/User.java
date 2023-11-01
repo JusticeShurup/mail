@@ -23,11 +23,13 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table (name = "Users")
+@Table (name = "\"Users\"")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String firstname;
+    private String lastname;
     private String username;
     private String password;
 
