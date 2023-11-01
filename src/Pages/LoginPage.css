@@ -21,6 +21,7 @@
     text-align: center;
     justify-content: center;
     align-items: center;
+
 }
 
 .input-box {
@@ -46,4 +47,19 @@
     width: 305px;
     padding: 5px;
     margin: 40px 0px 0px 0px;
+    font-size: large;
+    transition: 0.3s ease;
+}
+
+.login-page-button:hover {
+    color: white;
+}
+
+.module-change-button {
+    transition: 0.3s ease;
+
+}
+
+.module-change-button:hover {
+    color: white;
 }
