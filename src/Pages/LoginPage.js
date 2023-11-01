@@ -9,25 +9,42 @@ import { axiosInstance } from '../api.config';
 export default function LoginPage() {
     const [isLoginning, setLoginning] = useState(true);
 
+    const baseURL = 'http://localhost:8080/api/v1/auth'
+
     function tryAuthorize(e) {
-        axiosInstance.post('auth/authenticate', {
+        axios.post(baseURL + '/authenticate', {
             username: e.target[0].value,
             password: e.target[1].value
         }).then( function(response) {
           console.log(response)
+          localStorage.setItem("token", response.data.token);
+          axiosInstance.interceptors.request.use(
+            (config) => {
+              config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`
+              return config 
+          
+            }
+          )
         }).catch((error) => {
           console.log(error);
         })
     }
 
     function tryRegister(e) {
-        axiosInstance.post('auth/register', {
+        axios.post(baseURL + '/register', {
             firstname: e.target[0].value,
             lastname: e.target[1].value,
             username: e.target[2].value,
             password: e.target[3].value
         }).then( function(response) {
-          console.log(response);
+            localStorage.setItem("token", response.token);
+            axiosInstance.interceptors.request.use(
+                (config) => {
+                  config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`
+                  return config 
+              
+                }
+              )
         }).catch((error) => {
           console.log(error);
         })
