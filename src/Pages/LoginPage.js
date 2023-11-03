@@ -42,11 +42,11 @@ export default function LoginPage() {
                     <h2>Добро пожаловать!</h2>
                     <form action='#' onSubmit={(e) => tryAuthorize(e)}>
                         <div className='input-box'>
-                            <label for='login'>Login</label>
+                            <label htmlForfor='login'>Login</label>
                             <input id='login' name='login' type='text'></input>
                         </div>
                         <div className='input-box'>
-                            <label for='password'>Password</label>
+                            <label htmlFor='password'>Password</label>
                             <input name='password' type='password'></input>
                         </div>
                         <button className='login-page-button'>Войти</button>
@@ -62,25 +62,25 @@ export default function LoginPage() {
                     <h2>Добро пожаловать!</h2>
                     <form action='#' onSubmit= {(e) => tryRegister(e)}>
                         <div className='input-box'>
-                            <label for='firstname'>Имя</label>
+                            <label htmlFor='firstname'>Имя</label>
                             <input id='firstname' name='firstname' type='text'></input>
                         </div>
 
                         <div className='input-box'>
-                            <label for='lastname'>Фамилия</label>
+                            <label htmlFor='lastname'>Фамилия</label>
                             <input id='lastname' name='lastname' type='text'></input>
                         </div>
 
                         <div className='input-box'>
-                            <label for='login'>Login</label>
+                            <label htmlFor='login'>Login</label>
                             <input id='login' name='login' type='text'></input>
                         </div>
                         <div className='input-box'>
-                            <label for='password'>Password</label>
+                            <label htmlFor='password'>Password</label>
                             <input name='password' type='password'></input>
                         </div>  
                         <div className='input-box'>
-                            <label for='confrim-password'>Confirm password</label>
+                            <label htmlFor='confrim-password'>Confirm password</label>
                             <input name='confrim-password' type='password'></input>
                         </div>
                         <button className='login-page-button'>Зарегистрироваться</button>
