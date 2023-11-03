@@ -1,7 +1,8 @@
+import { Link } from 'react-router-dom';
 import '../../Pages/LoginPage.css'
 
 
-export default function RegistrationModule() {
+export default function Registration() {
 
     const BASEURL = 'http://localhost:8080/api/v1/auth';
 
@@ -21,7 +22,7 @@ export default function RegistrationModule() {
                     <label for='password'>Confirm password</label>
                     <input name='password' type='password'></input>
                 </div>
-                <button className='login-page-button'>Зарегистрироваться</button>
+                <Link to="/login">Войти</Link>
 
             </form>
         </div>
