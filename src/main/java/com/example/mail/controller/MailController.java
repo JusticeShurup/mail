@@ -40,6 +40,7 @@ public class MailController {
     @GetMapping("/getMailDepartments")
     public  ResponseEntity<String> getMailDepartments() throws IOException {
         try {
+
             List<MailDepartment> mailDepartments = mailDepartmentService.getMailDepartmentList();
             String answer = jsonFormater.writeValueAsString(mailDepartments);
             return new ResponseEntity<>(answer, HttpStatus.OK);
