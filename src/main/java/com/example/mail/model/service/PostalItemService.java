@@ -9,4 +9,7 @@ public interface PostalItemService {
     void save(PostalItem postalItem);
     Optional<PostalItem> getPostalItemById(long id);
     List<PostalItem> getPostalItemList();
+
+    List<PostalItem> getPostalItemRecipientIndex(String recipientUsername);
+    List<PostalItem> getPostalItemListBySenderIndex(String senderUsername);
 }

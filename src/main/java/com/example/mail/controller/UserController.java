@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -30,13 +31,11 @@ public class UserController {
 
     UserRepository userRepository;
 
-    @GetMapping("/test")
-    public ResponseEntity<String> test(Authentication authentication) {
-        return  new ResponseEntity<>(authentication.getName(), HttpStatus.OK);
-    }
+
 
     @GetMapping ("/getPostalItems")
-    public ArrayList<PostalItem> getUserPostalItems(Principal principal) {
+    public ArrayList<PostalItem> getUserPostalItems(Authentication authentication) {
+        Optional<User> user =  userRepository.findByUsername(authentication.getName());
 
         return new ArrayList<PostalItem>();
     }

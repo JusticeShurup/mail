@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PostalItemServiceImpl implements PostalItemService{
+public class PostalItemServiceImpl implements PostalItemService {
 
     @Autowired
     PostalItemRepository postalItemRepository;
@@ -27,10 +27,20 @@ public class PostalItemServiceImpl implements PostalItemService{
         return postalItemRepository.findById(id);
     }
 
-
     @Override
     public List<PostalItem> getPostalItemList() {
         return postalItemRepository.findAll();
+    }
+
+    @Override
+    public List<PostalItem> getPostalItemListByRecipientIndex(String recipientUsername) {
+        postalItemRepository
+        return null;
+    }
+
+    @Override
+    public List<PostalItem> getPostalItemListBySenderIndex(String senderUsername) {
+        return null;
     }
 
 
