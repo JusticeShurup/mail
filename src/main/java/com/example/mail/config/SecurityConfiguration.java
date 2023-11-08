@@ -1,5 +1,6 @@
 package com.example.mail.config;
 
+import com.example.mail.model.Enum.Role;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.context.annotation.Bean;
@@ -35,6 +36,8 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**")
                         .permitAll()
+                        .requestMatchers("api/v1/user/**")
+                        .hasRole(String.valueOf(Role.USER))
                         .requestMatchers("/api/v1/auth/**")
                         .permitAll()
                         .requestMatchers("/api/v1/mail/**")
