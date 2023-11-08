@@ -37,7 +37,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.OPTIONS, "/**")
                         .permitAll()
                         .requestMatchers("api/v1/user/**")
-                        .hasRole(String.valueOf(Role.USER))
+                        .hasAuthority(String.valueOf(Role.USER))
                         .requestMatchers("/api/v1/auth/**")
                         .permitAll()
                         .requestMatchers("/api/v1/mail/**")
