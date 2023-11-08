@@ -25,28 +25,6 @@ export default function Login(props) {
     const [errMsg, setErrMsg] = useState('');
 
     const BASEURL = 'http://localhost:8080/api/v1/auth';
-
-    function tryAuthorize(e) {
-        axios.post(BASEURL + '/authenticate', {
-            username: e.target[0].value,
-            password: e.target[1].value
-        }).then( function(response) {
-          console.log(response)
-        }).catch((error) => {
-          console.log(error);
-        })
-    }
-
-    function tryAuthorize(e) {
-        axios.post(BASEURL + '/auth/authenticate', {
-            username: e.target[0].value,
-            password: e.target[1].value
-        }).then( function(response) {
-          console.log(response)
-        }).catch((error) => {
-          console.log(error);
-        })
-    }
     
     const handleSubmit = async (e) => {
         e.preventDefault();

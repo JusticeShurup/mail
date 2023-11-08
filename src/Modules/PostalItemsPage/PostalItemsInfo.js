@@ -2,13 +2,18 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import './PostalItemsInfo.css'
 import { axiosInstance } from '../../api.config'
+import useAuth from '../../hooks/useAuth'
 
 const PostalItemsInfo = () => {
     const [postalItems, setPostalItems] = useState([{}])
-    
+    const { auth } = useAuth();
 
     useEffect(() => {
-        axiosInstance.get('/mail/getPostalItems').then((response) => {
+        axiosInstance.get('/mail/getPostalItems', {
+            headers: {
+                Authorization: `Bearer ${auth.accessToken}`
+            }
+        }).then((response) => {
             setPostalItems(Array.from(response.data));
             console.log(response.data);
         }).catch((e)=>{
