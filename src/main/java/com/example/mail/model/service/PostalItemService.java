@@ -10,6 +10,6 @@ public interface PostalItemService {
     Optional<PostalItem> getPostalItemById(long id);
     List<PostalItem> getPostalItemList();
 
-    List<PostalItem> getPostalItemRecipientIndex(String recipientUsername);
+    List<PostalItem> getPostalItemListByRecipientIndex(String recipientUsername);
     List<PostalItem> getPostalItemListBySenderIndex(String senderUsername);
 }

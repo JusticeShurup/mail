@@ -34,7 +34,6 @@ public class PostalItemServiceImpl implements PostalItemService {
 
     @Override
     public List<PostalItem> getPostalItemListByRecipientIndex(String recipientUsername) {
-        postalItemRepository
         return null;
     }
 
