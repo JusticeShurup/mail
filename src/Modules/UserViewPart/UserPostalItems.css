@@ -1,0 +1,28 @@
+.user-postal-items-page h2 {
+    text-align: center;
+}
+
+.user-postal-items-page {
+    height: 100vh;
+}
+
+.user-postal-items-page table{
+    width: 100%;
+    margin: 10px 0px;
+    padding: 10px 10px;
+}
+
+.user-postal-items-page table, td, tr {
+    border: 3px solid black;
+    
+}
+
+.user-postal-items-page td {
+    justify-content: center;
+    text-align: center;
+}
+.user-postal-items-page button {
+    justify-content: center;
+    text-align: center;
+    width: 50%;
+}

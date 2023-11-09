@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import "./RegistryPostalItemModal.css";
 import axios from 'axios';
 import { axiosInstance } from '../api.config';
+import useAuth from '../hooks/useAuth';
 
 
 
 
 const RegistryPostalItemModal = ({active, setActive}) => {
-    const [mailDepartments, setMailDepartmens] = useState([{}])
-    
+    const [mailDepartments, setMailDepartmens] = useState([{}]);
+    const {auth} = useAuth();
     
 
     
@@ -27,7 +28,8 @@ const RegistryPostalItemModal = ({active, setActive}) => {
 
         let customConfig = {
             headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${auth.accessToken}`
             }
         };
         
@@ -43,7 +45,13 @@ const RegistryPostalItemModal = ({active, setActive}) => {
 
 
     useEffect(() => {
-        axiosInstance.get("/mail/getMailDepartments").then((response) => {
+        let customConfig = {
+            headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${auth.accessToken}`
+            }
+        };
+        axiosInstance.get("/mail/getMailDepartments", customConfig).then((response) => {
             setMailDepartmens(Array.from(response.data));
         }).catch((e)=>{
         })
@@ -84,6 +92,10 @@ const RegistryPostalItemModal = ({active, setActive}) => {
                     <div className="input-group">
                         <input name="recipientName" id="name_collumn" type="text"/>
                         <label for="name_collumn">Введите имя получателя</label>
+                    </div>
+                    <div className="input-group">
+                        <input name="senderName" id="sendername_collumn" type="text"/>
+                        <label for="sendername_collumn">Введите имя отправителя</label>
                     </div>
                     <div className="select-item">
                         <select name="mailDepartment" id="departments">

@@ -15,6 +15,7 @@ import Login from "./Modules/LoginPage/Login";
 import Registration from "./Modules/LoginPage/Registration";
 import Missing from "./Modules/Missing";
 import RequireAuth from "./Modules/RequireAuth";
+import UserPostalItems from "./Modules/UserViewPart/UserPostalItems";
 
 
 const ROLES = {
@@ -38,7 +39,7 @@ function App() {
 
           <Route element={<RequireAuth allowedRoles={[ROLES.USER]}/>}>
             <Route path="/user/registryPostalItem" element={<MainPage/>}></Route>
-            <Route path="/user/postalItems" element={<PostalItemsPage/>}></Route>
+            <Route path="/user/postalItems" element={<UserPostalItems/>}></Route>
           </Route>
 
           <Route element={<RequireAuth allowedRoles={[ROLES.OPERATOR]}/>}>

@@ -1,12 +1,19 @@
-import React, {useState, useEffect} from 'react'
-import axios from 'axios'
-import './PostalItemsInfo.css'
-import { axiosInstance } from '../../api.config'
-import useAuth from '../../hooks/useAuth'
+import { useEffect, useState } from "react";
+import SwitchButton from "../Tools/SwitchButton"
+import "./UserPostalItems.css"
+import useAuth from "../../hooks/useAuth";
+import { axiosInstance } from "../../api.config";
 
-const PostalItemsInfo = () => {
+export default function UserPostalItems() {
+    const [postalItemsType, setPostalItemsType] = useState(false)
     const [postalItems, setPostalItems] = useState([{}])
     const { auth } = useAuth()
+
+    const [typeState, setTypeState] = useState(false)
+
+    const handleButtonClick =(typeState) => {
+        setTypeState(typeState);
+    }
 
     useEffect(() => {
         axiosInstance.get('/mail/getPostalItems', {
@@ -21,23 +28,14 @@ const PostalItemsInfo = () => {
         })
     },[]);
 
-    function takePostalItem(postalItem) {
-        postalItem.taken = (postalItem.taken === false && postalItem.recipientIndex === postalItem.mailDepartment.index)
-        axiosInstance.post('/mail/takePostalItemById?postalItemId=' + postalItem.id, {
-            headers:{
-                Authorization: `Bearer ${auth.accessToken}`
-            }
-        }).then((response) => {
-            console.log(response.data);
-        }).catch((e)=>{
-            console.log(e);
-        })
-        
-    }
-
     return (
-        <div className='postal-items-info'>
-            <table>
+      <div className="user-postal-items-page">
+        <h2>Ваши отправления</h2>
+        <div className="postal-items-type">
+            <SwitchButton onStateChange ={handleButtonClick}/>
+        </div>
+        <div className="">
+        <table>
                 <tr>
                     <th>ID</th>
                     <th>Тип посылки</th>
@@ -57,21 +55,20 @@ const PostalItemsInfo = () => {
                         <td key={postalItem.id}>{postalItem.recipientAddress}</td>
                         <td key={postalItem.id}>{postalItem.recipientName}</td>
                         <td key={postalItem.id}>
+                            {/*
                             <button onClick={e => takePostalItem(postalItem)}>
                             {
                                 postalItem.taken ? "Забран" : (postalItem.recipientIndex === postalItem.mailDepartment.index ? "Можно забрать" : "В доставке")   
                             } 
                             </button>
-                        
+                        */}
                         </td>
                         <td key={postalItem.id}>{postalItem.mailDepartment.name}</td>
                         </tr>
                     ))) 
                 }
-                
-            </table>
+                </table>
         </div>
-    );
+      </div>  
+    )
 }
-
-export default PostalItemsInfo;
