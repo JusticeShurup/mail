@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import './PostalItemsActions.css'
+import useAuth from '../../hooks/useAuth'
 
 const PostalItemsActions = () => {
     const [postalItems, setPostalItems] = useState([{}])
     const [mailDepartments, setMailDepartmens] = useState([{}])
+    const { auth } = useAuth()
+
 
     const baseURL = "http://localhost:8080/api/v1"
 
@@ -21,7 +24,11 @@ const PostalItemsActions = () => {
         };
         
         axios.post(baseURL + '/mail/transferPostalItemToMailDepartment?postalItemId=' + postalItemId 
-            + '&mailDepartmentId=' + mailDepartmentId)
+            + '&mailDepartmentId=' + mailDepartmentId, {
+                headers:{
+                    Authorization: `Bearer ${auth.accessToken}`
+                }
+            })
         .then(function (response) {
             console.log(response)
         })
@@ -34,7 +41,12 @@ const PostalItemsActions = () => {
 
 
     useEffect(() => {
-        axios.get(baseURL + '/mail/getPostalItems').then((response) => {
+        axios.get(baseURL + '/mail/getPostalItems', 
+        {
+            headers:{
+                Authorization: `Bearer ${auth.accessToken}`
+            }
+        }).then((response) => {
             setPostalItems(Array.from(response.data));
             console.log(response.data);
         }).catch((e) => {
@@ -43,7 +55,11 @@ const PostalItemsActions = () => {
     }, []);
 
     useEffect(() => {
-        axios.get(baseURL + "/mail/getMailDepartments").then((response) => {
+        axios.get(baseURL + "/mail/getMailDepartments", {
+            headers:{
+                Authorization: `Bearer ${auth.accessToken}`
+            }
+        }).then((response) => {
             setMailDepartmens(Array.from(response.data));
             console.log(baseURL);
         }).catch((e)=>{

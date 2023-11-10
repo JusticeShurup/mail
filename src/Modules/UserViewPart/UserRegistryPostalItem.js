@@ -1,24 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import "./RegistryPostalItemModal.css";
-import axios from 'axios';
-import { axiosInstance } from '../api.config';
-import useAuth from '../hooks/useAuth';
+import { useState } from 'react';
+import './UserRegistryPostalItem.css'
+import useAuth from '../../hooks/useAuth';
+import { useEffect } from 'react';
+import { axiosInstance } from '../../api.config';
 
 
 
+export default function UserRegistryPostalItem() {
+    const [mailDepartments, setMailDepartments] = useState([{}])
+    const { auth } = useAuth();
 
-const RegistryPostalItemModal = ({active, setActive}) => {
-    const [mailDepartments, setMailDepartmens] = useState([{}]);
-    const {auth} = useAuth();
-    
-
-    
     function registryPostalItem(e) {
         e.preventDefault();
         const data = new FormData(e.target);
 
         const PostalItem = Object.fromEntries(data.entries());
+        PostalItem.senderName = auth.user;
         PostalItem.taken = false;
+
         
         let MailDepartment = JSON.parse(PostalItem.mailDepartment);
         
@@ -33,7 +32,7 @@ const RegistryPostalItemModal = ({active, setActive}) => {
             }
         };
         
-        axiosInstance.post('/mail/registryPostalItem', JSON.stringify(PostalItem), customConfig)
+        axiosInstance.post('/user/registryPostalItem', JSON.stringify(PostalItem), customConfig)
         .then(function (response) {
             console.log(response)
         })
@@ -43,7 +42,6 @@ const RegistryPostalItemModal = ({active, setActive}) => {
         
     }
 
-
     useEffect(() => {
         let customConfig = {
             headers: {
@@ -52,18 +50,15 @@ const RegistryPostalItemModal = ({active, setActive}) => {
             }
         };
         axiosInstance.get("/mail/getMailDepartments", customConfig).then((response) => {
-            setMailDepartmens(Array.from(response.data));
+            setMailDepartments(Array.from(response.data));
         }).catch((e)=>{
         })
     },[]);
 
-    
-
-
     return (
-        <div className = {active ? "modal active" : "modal"} onClick={() => setActive(false )}>
-            <div className={active ? "modal__content active" : "modal"} onClick={e => e.stopPropagation()}>
-                <h1>Введите данные об отправлении</h1>
+        <div className="user-registry-postal-item-page">
+            <h2>Регистрация отправления</h2>
+            <div className="registry-form">
                 <form action='#' onSubmit={(e) =>{registryPostalItem(e)} }>
                     <div className="select-item">
                         <select name="postalType" id="postalTypes">
@@ -85,17 +80,12 @@ const RegistryPostalItemModal = ({active, setActive}) => {
                         <label for="departments">Выберите индекс получателя</label>
                     </div>
                     <div className="input-group">
-
                         <input name="recipientAddress" id="address_collumn" type="text"/>
                         <label for="address_collumn">Введите адрес получателя</label>
                     </div>
                     <div className="input-group">
                         <input name="recipientName" id="name_collumn" type="text"/>
                         <label for="name_collumn">Введите имя получателя</label>
-                    </div>
-                    <div className="input-group">
-                        <input name="senderName" id="sendername_collumn" type="text"/>
-                        <label for="sendername_collumn">Введите имя отправителя</label>
                     </div>
                     <div className="select-item">
                         <select name="mailDepartment" id="departments">
@@ -108,14 +98,9 @@ const RegistryPostalItemModal = ({active, setActive}) => {
                         <label for="departments">Выберите отделение</label>
                     </div>
 
-
-
                     <button type='submit'>Зарегистрировать посылку</button>
                 </form>
             </div>
-            
         </div>
-    )
+    );
 }
-
-export default RegistryPostalItemModal;

@@ -6,11 +6,11 @@ import useAuth from '../../hooks/useAuth'
 
 const PostalItemsInfo = () => {
     const [postalItems, setPostalItems] = useState([{}])
-    const { auth } = useAuth();
+    const { auth } = useAuth()
 
     useEffect(() => {
         axiosInstance.get('/mail/getPostalItems', {
-            headers: {
+            headers:{
                 Authorization: `Bearer ${auth.accessToken}`
             }
         }).then((response) => {
@@ -23,7 +23,11 @@ const PostalItemsInfo = () => {
 
     function takePostalItem(postalItem) {
         postalItem.taken = (postalItem.taken === false && postalItem.recipientIndex === postalItem.mailDepartment.index)
-        axiosInstance.post('/mail/takePostalItemById?postalItemId=' + postalItem.id).then((response) => {
+        axiosInstance.post('/mail/takePostalItemById?postalItemId=' + postalItem.id, {
+            headers:{
+                Authorization: `Bearer ${auth.accessToken}`
+            }
+        }).then((response) => {
             console.log(response.data);
         }).catch((e)=>{
             console.log(e);
