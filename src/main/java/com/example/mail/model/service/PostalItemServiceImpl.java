@@ -33,13 +33,18 @@ public class PostalItemServiceImpl implements PostalItemService {
     }
 
     @Override
-    public List<PostalItem> getPostalItemListByRecipientIndex(String recipientUsername) {
-        return null;
+    public List<PostalItem> getAllUserPostalItems(String username) {
+        return postalItemRepository.findPostalItemByRecipientNameOrSenderName(username, username);
     }
 
     @Override
-    public List<PostalItem> getPostalItemListBySenderIndex(String senderUsername) {
-        return null;
+    public List<PostalItem> getPostalItemListByRecipientName(String recipientUsername) {
+        return postalItemRepository.findPostalItemByRecipientName(recipientUsername);
+    }
+
+    @Override
+    public List<PostalItem> getPostalItemListBySenderName(String senderUsername) {
+        return postalItemRepository.findPostalItemBySenderName(senderUsername);
     }
 
 

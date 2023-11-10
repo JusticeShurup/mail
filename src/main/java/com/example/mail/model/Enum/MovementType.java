@@ -2,10 +2,13 @@ package com.example.mail.model.Enum;
 
 
 public enum MovementType {
+    CONSIDERATIONTOREGISTRY,
     REGISTERED,
     REDIRECTED,
-    DELIVERED,
     DEPARTED,
+    DELIVERED,
+    CONSIDERATIONTOTAKE,
+
     TAKEN
 
 

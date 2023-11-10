@@ -7,6 +7,7 @@ import com.example.mail.model.domain.PostalItem;
 import com.example.mail.model.repository.MovementHistoryRepository;
 import com.example.mail.model.service.*;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,6 +49,18 @@ public class MailController {
         catch (Exception ex) {
             return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/getPostalItemsByRecipientName")
+    public  ResponseEntity<String> getPostalItemsByRecipientName(String recipientName) throws JsonProcessingException {
+
+        return new ResponseEntity<>(jsonFormater.writeValueAsString(postalItemService.getPostalItemListByRecipientName(recipientName)), HttpStatus.OK);
+    }
+
+    @GetMapping("/getPostalItemsBySenderName")
+    public  ResponseEntity<String> getPostalItemsBySenderName(String recipientName) throws JsonProcessingException {
+
+        return new ResponseEntity<>(jsonFormater.writeValueAsString(postalItemService.getPostalItemListBySenderName(recipientName)), HttpStatus.OK);
     }
 
     @RequestMapping(

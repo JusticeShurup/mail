@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.jackson.Jacksonized;
 
 @Entity
-@Table (name = "\"MovemementHistory\"")
+@Table (name = "\"MovementHistory\"")
 public class MovementHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

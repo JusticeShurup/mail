@@ -56,12 +56,5 @@ public class PostalItem {
     private List<MovementHistory> movementHistoryList;
 
 
-    public void setMailDepartment(MailDepartment mailDepartment) {
-        this.mailDepartment = mailDepartment;
-    }
-
-    public void setTaken(boolean flag) {
-        taken = flag;
-    }
 
 }

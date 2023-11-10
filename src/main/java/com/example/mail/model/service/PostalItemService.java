@@ -10,6 +10,10 @@ public interface PostalItemService {
     Optional<PostalItem> getPostalItemById(long id);
     List<PostalItem> getPostalItemList();
 
-    List<PostalItem> getPostalItemListByRecipientIndex(String recipientUsername);
-    List<PostalItem> getPostalItemListBySenderIndex(String senderUsername);
+
+    // Returns all user postal items (Outgoing and incoming)
+    List<PostalItem> getAllUserPostalItems(String username);
+
+    List<PostalItem> getPostalItemListByRecipientName(String recipientUsername);
+    List<PostalItem> getPostalItemListBySenderName(String senderUsername);
 }
