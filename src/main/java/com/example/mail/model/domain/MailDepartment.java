@@ -2,11 +2,13 @@ package com.example.mail.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Data
 @Table (name = "\"MailDepartments\"")
 
 public class MailDepartment {
@@ -21,48 +23,22 @@ public class MailDepartment {
     private String address;
 
     @OneToMany (mappedBy = "mailDepartment")
+    @JsonIgnore
     private List<PostalItem> postalItemList;
 
     @OneToMany (mappedBy = "mailDepartment")
     @JsonIgnore
     private List<MovementHistory> movementHistoryList;
 
-    public List<MovementHistory> getMovementHistoryList() {
-        return  movementHistoryList;
-    }
+    @OneToMany (mappedBy = "mailDepartment")
+    @JsonIgnore
+    private List<User> operatorList;
 
     protected MailDepartment() {}
 
     public  MailDepartment(String index, String name, String address) {
         this.index = index;
         this.name = name;
-        this.address = address;
-    }
-
-    public long getId () {
-        return id;
-    }
-
-    public String getIndex () {
-        return index;
-    }
-
-    public void setIndex (String index) {
-        this.index = index;
-    }
-
-    public String getName () {
-        return name;
-    }
-
-    public void setName (String name) {
-        this.name = name;
-    }
-    public String getAddress () {
-        return address;
-    }
-
-    public void setAddress(String address) {
         this.address = address;
     }
 

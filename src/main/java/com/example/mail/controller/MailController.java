@@ -4,14 +4,12 @@ import com.example.mail.model.Enum.MovementType;
 import com.example.mail.model.domain.MailDepartment;
 import com.example.mail.model.domain.MovementHistory;
 import com.example.mail.model.domain.PostalItem;
-import com.example.mail.model.repository.MovementHistoryRepository;
 import com.example.mail.model.service.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,14 +34,14 @@ public class MailController {
     @Autowired
     private MovementHistoryServiceImpl movementHistoryService;
 
-    private ObjectMapper jsonFormater = new ObjectMapper();
+    private final ObjectMapper jsonFormatter = new ObjectMapper();
 
     @GetMapping("/getMailDepartments")
     public  ResponseEntity<String> getMailDepartments() throws IOException {
         try {
 
             List<MailDepartment> mailDepartments = mailDepartmentService.getMailDepartmentList();
-            String answer = jsonFormater.writeValueAsString(mailDepartments);
+            String answer = jsonFormatter.writeValueAsString(mailDepartments);
             return new ResponseEntity<>(answer, HttpStatus.OK);
         }
         catch (Exception ex) {
@@ -53,14 +51,13 @@ public class MailController {
 
     @GetMapping("/getPostalItemsByRecipientName")
     public  ResponseEntity<String> getPostalItemsByRecipientName(String recipientName) throws JsonProcessingException {
-
-        return new ResponseEntity<>(jsonFormater.writeValueAsString(postalItemService.getPostalItemListByRecipientName(recipientName)), HttpStatus.OK);
+        return new ResponseEntity<>(jsonFormatter.writeValueAsString(postalItemService.getPostalItemListByRecipientName(recipientName)), HttpStatus.OK);
     }
 
     @GetMapping("/getPostalItemsBySenderName")
     public  ResponseEntity<String> getPostalItemsBySenderName(String recipientName) throws JsonProcessingException {
 
-        return new ResponseEntity<>(jsonFormater.writeValueAsString(postalItemService.getPostalItemListBySenderName(recipientName)), HttpStatus.OK);
+        return new ResponseEntity<>(jsonFormatter.writeValueAsString(postalItemService.getPostalItemListBySenderName(recipientName)), HttpStatus.OK);
     }
 
     @RequestMapping(
@@ -70,7 +67,7 @@ public class MailController {
     public ResponseEntity<String> registryPostalItem(@RequestBody String payload) throws IOException {
         // The payload parameter contains the JSON string from the request body
         try {
-            PostalItem postalItem = jsonFormater.readValue(payload, PostalItem.class);
+            PostalItem postalItem = jsonFormatter.readValue(payload, PostalItem.class);
 
             if (mailDepartmentService.getMailDepartmentByIndex(postalItem.getRecipientIndex()).isEmpty()) {
                 return new ResponseEntity<>("Mail Department doesn't exists", HttpStatus.BAD_REQUEST);
@@ -92,7 +89,7 @@ public class MailController {
     public  ResponseEntity<String> getPostalItems() throws IOException {
         try {
             List<PostalItem> postalItems = postalItemService.getPostalItemList();
-            String answer = jsonFormater.writeValueAsString(postalItems);
+            String answer = jsonFormatter.writeValueAsString(postalItems);
             return new ResponseEntity<>(answer, HttpStatus.OK);
         }
         catch (Exception ex) {
@@ -108,7 +105,7 @@ public class MailController {
                 return new ResponseEntity<>("Postal item not found", HttpStatus.BAD_REQUEST);
             }
 
-            String movementHistory = jsonFormater.writeValueAsString(postalItem.get().getMovementHistoryList());
+            String movementHistory = jsonFormatter.writeValueAsString(postalItem.get().getMovementHistoryList());
 
             return new ResponseEntity<>(movementHistory, HttpStatus.OK);
         }
@@ -125,7 +122,7 @@ public class MailController {
             for (var postalItem : postalItems) {
                 movementHistories.add(postalItem.getMovementHistoryList());
             }
-            return new ResponseEntity<>(jsonFormater.writeValueAsString(movementHistories).toString(), HttpStatus.OK);
+            return new ResponseEntity<>(jsonFormatter.writeValueAsString(movementHistories).toString(), HttpStatus.OK);
         }
         catch (Exception ex)
         {

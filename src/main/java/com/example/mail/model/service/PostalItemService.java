@@ -13,7 +13,10 @@ public interface PostalItemService {
 
     // Returns all user postal items (Outgoing and incoming)
     List<PostalItem> getAllUserPostalItems(String username);
-
     List<PostalItem> getPostalItemListByRecipientName(String recipientUsername);
     List<PostalItem> getPostalItemListBySenderName(String senderUsername);
+
+    List<PostalItem> getPostalItemListByMailDepartmentId(Long id);
+
+    List<PostalItem>  getConsiderationToRegistryPostalItemListByMailDepartmentId(Long id);
 }

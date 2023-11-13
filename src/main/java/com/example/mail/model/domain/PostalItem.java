@@ -2,7 +2,9 @@ package com.example.mail.model.domain;
 
 import com.example.mail.model.Enum.PostalItemType;
 import com.fasterxml.jackson.annotation.JacksonInject;
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -47,7 +49,7 @@ public class PostalItem {
 
 
     @ManyToOne
-    @JoinColumn (name = "mail_department_id")
+    @JoinColumn (name = "mail_department_id", nullable = false)
     private MailDepartment mailDepartment;
 
 

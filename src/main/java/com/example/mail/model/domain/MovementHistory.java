@@ -4,9 +4,11 @@ import com.example.mail.model.Enum.MovementType;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.extern.jackson.Jacksonized;
 
 @Entity
+@Data
 @Table (name = "\"MovementHistory\"")
 public class MovementHistory {
     @Id
