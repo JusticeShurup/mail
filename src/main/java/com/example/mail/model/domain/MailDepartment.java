@@ -32,7 +32,8 @@ public class MailDepartment {
 
     @OneToMany (mappedBy = "mailDepartment")
     @JsonIgnore
-    private List<User> operatorList;
+    private List<Operator> operatorList;
+
 
     protected MailDepartment() {}
 

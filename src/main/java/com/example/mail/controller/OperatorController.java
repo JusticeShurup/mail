@@ -32,6 +32,8 @@ public class OperatorController {
     UserServiceImpl userService;
 
     private final ObjectMapper jsonFormatter = new ObjectMapper();
+    /*
+
     @GetMapping("/getConsiderationToTakePostalItems")
     public ResponseEntity<String> getConsiderationToTakePostalItems(Authentication authentication) throws JsonProcessingException {
         Optional<User> user = userService.getUserByUsername(authentication.getName());
@@ -44,6 +46,7 @@ public class OperatorController {
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+    */
 
 
 

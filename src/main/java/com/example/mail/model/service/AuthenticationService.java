@@ -25,14 +25,29 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
 
-    public AuthenticationResponse register(RegisterRequest request) {
-        var user = User.builder()
+    private User buildUser(RegisterRequest request) {
+        return User.builder()
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole())
                 .build();
+    }
+
+    public User registerAndReturnUser(RegisterRequest request) { // Function to register user used for backend queries
+        var user = buildUser(request);
+
+
+        var refreshToken = jwtService.generateRefreshToken(user);
+        user.setRefreshToken(refreshToken);
+        repository.save(user);
+
+        return user;
+    }
+
+    public AuthenticationResponse register(RegisterRequest request) {
+        var user = buildUser(request);
 
         var accessToken = jwtService.generateAccessToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);

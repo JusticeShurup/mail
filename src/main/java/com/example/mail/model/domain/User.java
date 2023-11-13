@@ -23,11 +23,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table (name = "\"Users\"")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    protected Long id;
     private String firstname;
     private String lastname;
     private String username;
@@ -36,11 +37,6 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    @ManyToOne
-    @JoinColumn(name = "mail_department_id", nullable = true)
-    @JsonIgnore
-    private MailDepartment mailDepartment;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

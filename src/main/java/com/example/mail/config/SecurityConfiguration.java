@@ -38,6 +38,8 @@ public class SecurityConfiguration {
                         .permitAll()
                         .requestMatchers("api/v1/user/**")
                         .hasAuthority(String.valueOf(Role.USER))
+                        .requestMatchers("/api/v1/admin/**")
+                        .hasAuthority(String.valueOf(Role.ADMIN))
                         .requestMatchers("/api/v1/auth/**")
                         .permitAll()
                         .requestMatchers("/api/v1/mail/**")
