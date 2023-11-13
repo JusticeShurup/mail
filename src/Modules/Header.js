@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import "./Header.css"
 import useAuth from '../hooks/useAuth';
 
@@ -17,7 +17,7 @@ function UserHeader() {
 function OperatorHeader() {
     return (
         <>
-            <li><Link to="/">Главная</Link></li>
+            <li><Link to="/operator/queries">Запросы</Link></li>
             <li><Link to="/user/registryPostalItem">Новая посылка</Link></li>
             <li><Link to="/user/postalItems">Отправления</Link></li>
             <li><Link to="/login">Выход</Link></li>
@@ -36,10 +36,28 @@ function AdminHeader() {
     )
 }
 
+function DefaultHeader() {
+    return (
+        <>
+            <li><Link to="/">Главная</Link></li>
+            <li><Link to="/mailDepartments">Отделения</Link></li>
+            <li><Link to="/postalItems">Отправления</Link></li>
+            <li><Link to="/historyMovements">История перемещений</Link></li>
+            <li><Link to="/login">Вход</Link></li>
+        </>
+    )
+}
+
 
 
 function Header() {
     const { auth } = useAuth();
+
+    var headers = {
+        "USER": UserHeader(),
+        "OPERATOR": OperatorHeader(),
+        "ADMIN": AdminHeader()
+    };
 
     return (
         <div className="header-container">
@@ -48,18 +66,9 @@ function Header() {
                 <nav>
                     <ul className="nav__links">
                         {
-                            (auth?.roles) ? (auth.roles[0] === "USER" ? UserHeader() : <></> ) 
-                            : (
-                                <>
-                                <li><Link to="/">Главная</Link></li>
-                                <li><Link to="/mailDepartments">Отделения</Link></li>
-                                <li><Link to="/postalItems">Отправления</Link></li>
-                                <li><Link to="/historyMovements">История перемещений</Link></li>
-                                <li><Link to="/login">Вход</Link></li>
-                                </>
-                                 )
+                            (auth?.roles) ? (headers[auth?.roles[0]]) : DefaultHeader() 
                         }
-                        
+
                     </ul>
                 </nav>
             </header>

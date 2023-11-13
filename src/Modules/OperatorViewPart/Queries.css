@@ -1,0 +1,21 @@
+.postal-item-queries-page {
+    height: 100vh;
+}
+
+.postal-item-queries-page table{
+    width: 100%;
+    margin: 10px 0px;
+    padding: 10px 10px;
+}
+
+.postal-item-queries-page table, td, tr {
+    border: 3px solid black;
+    
+}
+
+
+.query {
+    width: 80%;
+    border: 1px solid #000;
+}
+

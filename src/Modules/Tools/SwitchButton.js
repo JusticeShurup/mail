@@ -20,8 +20,8 @@ export default function SwitchButton(props) {
     <div className="form-box">
 		<div className ="button-box">
 			<div id="btn"></div>
-			<button id="left" type="button" class="toggle-btn" onClick={leftClick}>Входящие</button>
-			<button id="right" type="button" class="toggle-btn" onClick={rightClick}>Исходящие</button>
+			<button id="left" type="button" class="toggle-btn" onClick={leftClick}>{props.left}</button>
+			<button id="right" type="button" class="toggle-btn" onClick={rightClick}>{props.right}</button>
 		</div>
 	</div>
     )
