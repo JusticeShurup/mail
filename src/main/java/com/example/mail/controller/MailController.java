@@ -201,6 +201,4 @@ public class MailController {
             return  new ResponseEntity<>(ex.toString(), HttpStatus.BAD_REQUEST);
         }
     }
-
-
 }

@@ -96,7 +96,7 @@ public class UserController {
             return new ResponseEntity<>(ex.toString(), HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>("Postal item is registered", HttpStatus.OK);
+        return new ResponseEntity<>("Postal item is on consideration to registry", HttpStatus.OK);
     }
 
     @GetMapping("/isUserExists")

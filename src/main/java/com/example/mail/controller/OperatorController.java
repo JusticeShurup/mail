@@ -8,10 +8,12 @@ import com.example.mail.model.domain.PostalItem;
 import com.example.mail.model.service.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
@@ -39,18 +41,69 @@ public class OperatorController {
 
     private final ObjectMapper jsonFormatter = new ObjectMapper();
 
-
     @GetMapping("/getConsiderationToRegistryPostalItems")
     public ResponseEntity<String> getConsiderationToRegistryPostalItems(Authentication authentication) throws JsonProcessingException {
-        Optional<Operator> operator = operatorService.getOperatorByUsername(authentication.getName());
-
-        if (operator.isEmpty()) return new ResponseEntity<>("Operator doesn't exists", HttpStatus.BAD_REQUEST);
+        Operator operator = operatorService.getOperatorByUsername(authentication.getName()).get();
 
         String response = jsonFormatter.writeValueAsString(postalItemService
                 .getConsiderationToRegistryPostalItemListByMailDepartmentId(
-                        operator.get().getMailDepartment().getId()));
+                        operator.getMailDepartment().getId()));
 
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/confirmRegistryPostalItem")
+    public ResponseEntity<String> confirmRegistryPostalItem(
+            Authentication authentication,
+            @RequestParam long postalItemId) {
+        Operator operator = operatorService.getOperatorByUsername(authentication.getName()).get();
+        Optional<PostalItem> postalItem = postalItemService.getPostalItemById(postalItemId);
+
+        if (postalItem.isEmpty()) {
+            return new ResponseEntity<>("Postal item doesn't exists", HttpStatus.BAD_REQUEST);
+        }
+        else if (postalItem.get().getCurrentMovementHistory().getMovementType() != MovementType.CONSIDERATIONTOREGISTRY) {
+            return new ResponseEntity<>("Postal item isn't allowed to registry", HttpStatus.BAD_REQUEST);
+        }
+
+        if (postalItem.get().getMailDepartment() != operator.getMailDepartment()) {
+            return new ResponseEntity<>("You are not allowed to confirm this Postal Item", HttpStatus.BAD_REQUEST);
+        }
+
+        MovementHistory movementHistory = new MovementHistory(
+                postalItem.get().getMailDepartment(),
+                postalItem.get(),
+                MovementType.REGISTERED);
+        movementHistoryService.save(movementHistory);
+
+        return new ResponseEntity<>("Postal Item successfully registered", HttpStatus.OK);
+    }
+
+    @PostMapping("/declineRegistryPostalItem")
+    public ResponseEntity<String> declineRegistryPostalItem(
+            Authentication authentication,
+            @RequestParam long postalItemId) {
+        Operator operator = operatorService.getOperatorByUsername(authentication.getName()).get();
+        Optional<PostalItem> postalItem = postalItemService.getPostalItemById(postalItemId);
+
+        if (postalItem.isEmpty()) {
+            return new ResponseEntity<>("Postal item doesn't exists", HttpStatus.BAD_REQUEST);
+        }
+        else if (postalItem.get().getCurrentMovementHistory().getMovementType() != MovementType.CONSIDERATIONTOREGISTRY) {
+            return new ResponseEntity<>("Postal item isn't allowed to decline", HttpStatus.BAD_REQUEST);
+        }
+
+        if (postalItem.get().getMailDepartment() != operator.getMailDepartment()) {
+            return new ResponseEntity<>("You are not allowed to decline this Postal Item", HttpStatus.BAD_REQUEST);
+        }
+
+        MovementHistory movementHistory = new MovementHistory(
+                postalItem.get().getMailDepartment(),
+                postalItem.get(),
+                MovementType.DECLINED);
+        movementHistoryService.save(movementHistory);
+
+        return new ResponseEntity<>("Postal Item successfully declined", HttpStatus.OK);
     }
 
     @GetMapping ("/getConsiderationToTakePostalItems")
@@ -118,9 +171,30 @@ public class OperatorController {
         return new ResponseEntity<>("Postal Item successfully transferred", HttpStatus.OK);
     }
 
+    @PostMapping("/confirmTakePostalItem")
+    public ResponseEntity<String> confirmTakePostalItem(
+            Authentication authentication,
+            @RequestParam long postalItemId) {
+        Operator operator = operatorService.getOperatorByUsername(authentication.getName()).get();
+        Optional<PostalItem> postalItem = postalItemService.getPostalItemById(postalItemId);
 
+        if (postalItem.isEmpty()) {
+            return new ResponseEntity<>("Postal item doesn't exists", HttpStatus.BAD_REQUEST);
+        }
+        else if (postalItem.get().getCurrentMovementHistory().getMovementType() != MovementType.CONSIDERATIONTOTAKE) {
+            return new ResponseEntity<>("Postal item isn't allowed to be taken", HttpStatus.BAD_REQUEST);
+        }
 
+        if (postalItem.get().getMailDepartment() != operator.getMailDepartment()) {
+            return new ResponseEntity<>("You are not allowed to give out this Postal Item", HttpStatus.BAD_REQUEST);
+        }
 
+        MovementHistory movementHistory = new MovementHistory(
+                postalItem.get().getMailDepartment(),
+                postalItem.get(),
+                MovementType.TAKEN);
+        movementHistoryService.save(movementHistory);
 
-
+        return new ResponseEntity<>("Postal item is successfully taken", HttpStatus.OK);
+    }
 }
