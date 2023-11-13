@@ -57,6 +57,11 @@ public class PostalItem {
     @JsonIgnore
     private List<MovementHistory> movementHistoryList;
 
+    @JsonIgnore
+    public MovementHistory getCurrentMovementHistory() {
+        return movementHistoryList.get(movementHistoryList.size() - 1);
+    }
+
 
 
 }

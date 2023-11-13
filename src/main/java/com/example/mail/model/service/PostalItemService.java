@@ -19,4 +19,6 @@ public interface PostalItemService {
     List<PostalItem> getPostalItemListByMailDepartmentId(Long id);
 
     List<PostalItem>  getConsiderationToRegistryPostalItemListByMailDepartmentId(Long id);
+
+    List<PostalItem> getConsiderationToTakePostalItemListByMailDepartmentId(long id);
 }

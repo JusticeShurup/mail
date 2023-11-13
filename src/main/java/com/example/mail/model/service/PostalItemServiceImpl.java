@@ -75,8 +75,20 @@ public class PostalItemServiceImpl implements PostalItemService {
         return selectedPostalItems;
     }
 
+    @Override
+    public List<PostalItem> getConsiderationToTakePostalItemListByMailDepartmentId(long id) {
+        ArrayList<PostalItem> postalItems = (ArrayList<PostalItem>) getPostalItemListByMailDepartmentId(id);
 
+        ArrayList<PostalItem> selectedPostalItems = new ArrayList<>();
 
+        for (var postalItem :
+                postalItems) {
+            if (postalItem.getMovementHistoryList().get(postalItem.getMovementHistoryList().size() - 1).getMovementType() == MovementType.CONSIDERATIONTOTAKE) {
+                selectedPostalItems.add(postalItem);
+            }
+        }
+        return selectedPostalItems;
+    }
 
 
 }
