@@ -1,0 +1,31 @@
+
+
+.operator-postal-items-page h1, h2 {
+    text-align: center;
+}
+
+.operator-postal-items-page {
+    height: 100vh;
+}
+
+.operator-postal-items-page table{
+    width: 100%;
+    margin: 10px 0px;
+    padding: 10px 10px;
+}
+
+.operator-postal-items-page table, td, tr {
+    border: 3px solid black;
+    
+}
+
+.operator-postal-items-page td {
+    justify-content: center;
+    text-align: center;
+}
+
+.operator-postal-items-page button {
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}

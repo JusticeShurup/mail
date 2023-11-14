@@ -19,6 +19,7 @@ import UserPostalItems from "./Modules/UserViewPart/UserPostalItems";
 import UserMovementHistory from "./Modules/UserViewPart/UserMovementHistory";
 import UserRegistryPostalItem from "./Modules/UserViewPart/UserRegistryPostalItem";
 import Queries from "./Modules/OperatorViewPart/Queries";
+import OperatorPostalItems from "./Modules/OperatorViewPart/OperatorPostalItems";
 
 
 const ROLES = {
@@ -48,6 +49,7 @@ function App() {
 
           <Route element={<RequireAuth allowedRoles={[ROLES.OPERATOR]}/>}>
             <Route path="/operator/queries" element={<Queries></Queries>}></Route>
+            <Route path="/operator/postalItems" element={<OperatorPostalItems></OperatorPostalItems>}></Route>
           </Route>
 
 

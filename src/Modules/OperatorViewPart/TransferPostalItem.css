@@ -1,0 +1,22 @@
+.transfer-postal-item-page {
+    height: 100%;
+}
+
+.transfer-postal-item-page h1, h2 {
+    text-align: center;
+}
+
+.mail-department-selector {
+    align-items: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.mail-department-selector select, 
+.mail-department-selector button {
+    margin: 10px;
+    width: 50%;
+    text-align: center;
+    font-size: large;
+}
