@@ -47,13 +47,20 @@ public class AdminController {
                     .role(Role.valueOf((String) payloadMap.get("role")))
                     .build();
 
-            var user = authenticationService.registerAndReturnUser(registerRequest);
-
             // Java can't cast Integer to Long when it's deserialize from Jackson (Maybe I'm stupid LoL)
             Integer mailDepartmentIdInteger = (Integer) payloadMap.get("mailDepartmentId");
-            Long mailDepartmentIdLong = mailDepartmentIdInteger.longValue();
+            long mailDepartmentIdLong = mailDepartmentIdInteger.longValue();
 
             var mailDepartment = mailDepartmentService.getMailDepartmentById(mailDepartmentIdLong);
+
+            if (mailDepartment.isEmpty()) {
+                return new ResponseEntity<>(
+                        "Mail Department for this operator doesn't exists",
+                        HttpStatus.BAD_REQUEST);
+            }
+
+
+            var user = authenticationService.registerAndReturnUser(registerRequest);
 
             Operator operator = new Operator(user.getId(), user.getFirstname(), user.getLastname(), user.getUsername(), user.getPassword(), user.getRefreshToken(), user.getRole(), mailDepartment.get());
 

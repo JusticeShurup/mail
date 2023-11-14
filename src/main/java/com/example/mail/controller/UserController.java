@@ -110,6 +110,9 @@ public class UserController {
         if (postalItem.isEmpty()) {
             return new ResponseEntity<>("Postal item doesn't exists", HttpStatus.BAD_REQUEST);
         }
+        if (postalItem.get().getCurrentMovementHistory().getMovementType() == MovementType.DELIVERED) {
+            return new ResponseEntity<>("Postal item isn't ready to be taken", HttpStatus.OK);
+        }
 
         if (!Objects.equals(postalItem.get().getRecipientName(), authentication.getName())) {
 

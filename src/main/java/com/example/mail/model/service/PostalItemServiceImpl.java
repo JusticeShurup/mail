@@ -83,7 +83,7 @@ public class PostalItemServiceImpl implements PostalItemService {
 
         for (var postalItem :
                 postalItems) {
-            if (postalItem.getMovementHistoryList().get(postalItem.getMovementHistoryList().size() - 1).getMovementType() == MovementType.CONSIDERATIONTOTAKE) {
+            if (postalItem.getCurrentMovementHistory().getMovementType() == MovementType.CONSIDERATIONTOTAKE) {
                 selectedPostalItems.add(postalItem);
             }
         }

@@ -16,6 +16,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -40,6 +42,34 @@ public class OperatorController {
     private MovementHistoryServiceImpl movementHistoryService;
 
     private final ObjectMapper jsonFormatter = new ObjectMapper();
+
+    @GetMapping("/getMailDepartmentPostalItems")
+    public ResponseEntity<String> getOperatorPostalItems(Authentication authentication) throws JsonProcessingException {
+        Operator operator = operatorService.getOperatorByUsername(authentication.getName()).get();
+
+        var postalItemsList = operator.getMailDepartment().getPostalItemList();
+        if (postalItemsList.isEmpty()) {
+            return new ResponseEntity<>("There are no postal items", HttpStatus.OK);
+        }
+
+        String response = jsonFormatter.writeValueAsString(postalItemsList);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/getAnotherMailDepartments")
+    public ResponseEntity<String> getAnotherMailDepartments(Authentication authentication) throws JsonProcessingException {
+        Operator operator = operatorService.getOperatorByUsername(authentication.getName()).get();
+
+        MailDepartment currentMailDepartment = operator.getMailDepartment();
+
+        List<MailDepartment> mailDepartmentList = mailDepartmentService.getMailDepartmentList();
+        mailDepartmentList.remove(currentMailDepartment);
+
+        String response = jsonFormatter.writeValueAsString(mailDepartmentList);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
     @GetMapping("/getConsiderationToRegistryPostalItems")
     public ResponseEntity<String> getConsiderationToRegistryPostalItems(Authentication authentication) throws JsonProcessingException {
@@ -130,10 +160,10 @@ public class OperatorController {
         if (postalItem.isEmpty()) {
             return new ResponseEntity<>("Postal item doesn't exists",HttpStatus.BAD_REQUEST);
         }
-        else if (postalItem.get().getCurrentMovementHistory().getMovementType() != MovementType.CONSIDERATIONTOREGISTRY
-        && postalItem.get().getCurrentMovementHistory().getMovementType() != MovementType.CONSIDERATIONTOTAKE
-        && postalItem.get().getCurrentMovementHistory().getMovementType() != MovementType.DECLINED
-        && postalItem.get().getCurrentMovementHistory().getMovementType() != MovementType.TAKEN) {
+        else if (postalItem.get().getCurrentMovementHistory().getMovementType() == MovementType.CONSIDERATIONTOREGISTRY
+        || postalItem.get().getCurrentMovementHistory().getMovementType() == MovementType.CONSIDERATIONTOTAKE
+        || postalItem.get().getCurrentMovementHistory().getMovementType() == MovementType.DECLINED
+        || postalItem.get().getCurrentMovementHistory().getMovementType() == MovementType.TAKEN) {
             return new ResponseEntity<>("You can't transfer this postal item",HttpStatus.BAD_REQUEST);
         }
 
