@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import axios from 'axios';
 import './LoginPage.css'
-import LoginModule from '../Modules/LoginPage/LoginModule';
-import RegistrationModule from '../Modules/LoginPage/RegistrationModule';
+import LoginModule from '../Modules/LoginPage/Login';
+import RegistrationModule from '../Modules/LoginPage/Registration';
 import { axiosInstance } from '../api.config';
 
 export default function LoginPage() {

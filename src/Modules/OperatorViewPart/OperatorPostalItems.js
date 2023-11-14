@@ -51,7 +51,6 @@ export default function OperatorPostalItems() {
                 
                 {
                     isLoaded && postalItems[0].mailDepartment && (postalItems.map(postalItem => (
-                         
                         <tr>
                             <td key={postalItem.id}>{postalItem.id}</td>
                             <td key={postalItem.id}>{postalItem.postalType}</td>

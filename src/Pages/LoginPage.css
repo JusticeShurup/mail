@@ -5,11 +5,7 @@
     justify-content: center;
     text-align: center;
     align-items: center;
-}
-
-.login-page h2 {
-}
-
+} 
 .login-form {
     width: 640px;
     height: auto;
