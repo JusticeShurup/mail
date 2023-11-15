@@ -7,8 +7,7 @@ function MainPage() {
 
     return (
         <div className="mainpage">
-            <button className="modal-button" onClick={() => setModalActive(true)}>Зарегистрировать отправление</button>
-            <RegistryPostalItemModal active={modalActive} setActive={setModalActive}/>
+            <h1>Добро пожаловать!</h1>
         </div>
     );
 };

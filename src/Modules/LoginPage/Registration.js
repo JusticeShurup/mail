@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import '../../Pages/LoginPage.css'
+import './LoginPage.css'
 
 
 export default function Registration() {

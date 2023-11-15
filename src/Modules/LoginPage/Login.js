@@ -1,4 +1,4 @@
-import '../../Pages/LoginPage.css'
+import './LoginPage.css'
 import axios from 'axios';
 import { AuthProvider, AuthContext } from '../../context/AuthProvider';
 import useAuth from '../../hooks/useAuth';
