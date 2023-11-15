@@ -6,6 +6,7 @@ import com.example.mail.model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,6 +21,11 @@ public class OperatorServiceImpl implements OperatorService {
     @Override
     public void save(Operator operator) {
         operatorRepository.save(operator);
+    }
+
+    @Override
+    public List<Operator> getOperatorList() {
+        return operatorRepository.findAll();
     }
 
     @Override

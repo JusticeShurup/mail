@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 @RestController
@@ -36,7 +37,10 @@ public class AdminController {
 
     private final ObjectMapper jsonFormatter = new ObjectMapper();
     @PostMapping("/registerOperator")
-    public ResponseEntity<String> registryOperator(Authentication authentication, @RequestBody String payload) throws JsonProcessingException {
+    public ResponseEntity<String> registerOperator(
+            Authentication authentication,
+            @RequestBody String payload)
+            throws JsonProcessingException {
             Map<String, Object> payloadMap = jsonFormatter.readValue(payload, new TypeReference<Map<String, Object>>() {});
 
             var registerRequest = RegisterRequest.builder()
@@ -67,5 +71,34 @@ public class AdminController {
             operatorService.save(operator);
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/registerMailDepartment")
+    public ResponseEntity<String> registerMailDepartment(@RequestBody String mailDepartment) throws JsonProcessingException {
+
+
+        MailDepartment mailDepartmentRequest = jsonFormatter.readValue(mailDepartment, MailDepartment.class);
+
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/getMailDepartments")
+    public ResponseEntity<String> getMailDepartments() throws JsonProcessingException {
+        ArrayList<MailDepartment> mailDepartmentArrayList =
+                (ArrayList<MailDepartment>) mailDepartmentService.getMailDepartmentList();
+
+        String response = jsonFormatter.writeValueAsString(mailDepartmentArrayList);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/getOperators")
+    public ResponseEntity<String> getOperators() throws JsonProcessingException {
+        ArrayList<Operator> operatorArrayList = (ArrayList<Operator>) operatorService.getOperatorList();
+
+        String response = jsonFormatter.writeValueAsString(operatorArrayList);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
