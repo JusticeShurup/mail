@@ -48,6 +48,8 @@ public class UserController {
             return  new ResponseEntity<>("User doesn't have any postal items", HttpStatus.OK);
         }
 
+
+
         return new ResponseEntity<>(jsonFormatter.writeValueAsString(allUserPostalItems), HttpStatus.OK);
     }
     @GetMapping ("/getUserPostalItemsMovementHistory")

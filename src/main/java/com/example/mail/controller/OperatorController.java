@@ -227,4 +227,15 @@ public class OperatorController {
 
         return new ResponseEntity<>("Postal item is successfully taken", HttpStatus.OK);
     }
+
+    @GetMapping("/getMailDepartmentMovementHistory")
+    public ResponseEntity<String> getMailDepartmentMovementHistory(Authentication authentication) throws JsonProcessingException {
+        Operator operator = operatorService.getOperatorByUsername(authentication.getName()).get();
+
+        MailDepartment mailDepartment = operator.getMailDepartment();
+
+        String respone = jsonFormatter.writeValueAsString(mailDepartment.getMovementHistoryList());
+
+        return new ResponseEntity<>(respone, HttpStatus.OK);
+    }
 }

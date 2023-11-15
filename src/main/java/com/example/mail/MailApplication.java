@@ -38,7 +38,6 @@ public class MailApplication {
 				System.out.println("MailDepartment Detail:" + mailDepartment.toString());
 			}
 			*/
-
 		};
 	}
 
