@@ -19,6 +19,7 @@ function OperatorHeader() {
         <>
             <li><Link to="/operator/queries">Запросы</Link></li>
             <li><Link to="/operator/postalItems">Отправления</Link></li>
+            <li><Link to="/operator/movementHistory">История перемещений</Link></li>
             <li><Link to="/login">Выход</Link></li>
         </>
     )

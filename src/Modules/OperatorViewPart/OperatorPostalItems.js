@@ -21,7 +21,7 @@ export default function OperatorPostalItems() {
             }
         }).then((response) => {
             setPostalItems(Array.from(response.data));
-            console.log(postalItems);
+
 
         }).catch((error) => {
             console.log(error);
@@ -50,16 +50,16 @@ export default function OperatorPostalItems() {
                 </tr>
                 
                 {
-                    isLoaded && postalItems[0].mailDepartment && (postalItems.map(postalItem => (
-                        <tr>
-                            <td key={postalItem.id}>{postalItem.id}</td>
-                            <td key={postalItem.id}>{postalItem.postalType}</td>
-                            <td key={postalItem.id}>{postalItem.recipientIndex}</td>
-                            <td key={postalItem.id}>{postalItem.recipientAddress}</td>
-                            <td key={postalItem.id}>{postalItem.recipientName}</td>
-                            <td key={postalItem.id}>{postalItem.senderName}</td>
-                            <td key={postalItem.id}>{postalItem.taken}</td>
-                            <td key={postalItem.id}><button onClick={(e) => setTransferPostalItem(postalItem)}>Перенаправить</button></td>
+                    isLoaded && postalItems[0].mailDepartment && (postalItems.map((postalItem, index) => (
+                        <tr key={index}>
+                            <td>{postalItem.id}</td>
+                            <td>{postalItem.postalType}</td>
+                            <td>{postalItem.recipientIndex}</td>
+                            <td>{postalItem.recipientAddress}</td>
+                            <td>{postalItem.recipientName}</td>
+                            <td>{postalItem.senderName}</td>
+                            <td>{postalItem.taken}</td>
+                            <td><button onClick={(e) => setTransferPostalItem(postalItem)}>Перенаправить</button></td>
                         </tr>
                     )))
                 }

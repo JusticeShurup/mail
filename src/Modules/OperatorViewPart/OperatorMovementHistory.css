@@ -1,0 +1,29 @@
+.operator-movement-history-page h1, h2 {
+    text-align: center;
+}
+
+.operator-movement-history-page {
+    height: 100vh;
+}
+
+.operator-movement-history-page table{
+    width: 100%;
+    margin: 10px 0px;
+    padding: 10px 10px;
+}
+
+.operator-movement-history-page table, td, tr {
+    border: 3px solid black;
+    
+}
+
+.operator-movement-history-page td {
+    justify-content: center;
+    text-align: center;
+}
+
+.operator-movement-history-page button {
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}
