@@ -12,17 +12,21 @@ export default function RegistryDepartment() {
 
         const data = new FormData(e.target);
 
-        const mailDepartment = Object.fromEntries(data.entries());
+        const mailDepartment = Object.fromEntries(data.entries()); 
 
-        console.log(JSON.stringify(mailDepartment));
         
         axiosInstance.post("/admin/registerMailDepartment", JSON.stringify(mailDepartment) ,{
             headers:{
-                Authorization: `Bearer ${auth.accessToken}`
+                Authorization: `Bearer ${auth.accessToken}`,
+                "Content-Type": "application/json"  
             }
         }).then((response) => {
             
+        }).catch((error) => {
+            console.log(error);
         })
+        
+
 
     }
 

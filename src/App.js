@@ -20,6 +20,7 @@ import OperatorMovementHistory from "./Modules/OperatorViewPart/OperatorMovement
 import AdminMailDepartments from "./Modules/AdminViewPart/AdminMailDepartments";
 import AdminOperators from "./Modules/AdminViewPart/AdminOperators";
 import RegistryDepartment from "./Modules/AdminViewPart/RegistryDepartment";
+import RegistryOperator from "./Modules/AdminViewPart/RegistryOperator";
 
 
 const ROLES = {
@@ -54,6 +55,7 @@ function App() {
             <Route path="/admin/mailDepartments" element={<AdminMailDepartments></AdminMailDepartments>}></Route>
             <Route path="/admin/operators" element={<AdminOperators></AdminOperators>}></Route>
             <Route path="/admin/registryMailDepartment" element={<RegistryDepartment/>}></Route>
+            <Route path="/admin/registryOperator" element={<RegistryOperator/>}></Route>
           </Route>
 
           <Route exact path ="/"  element={<MainPage/>}></Route>

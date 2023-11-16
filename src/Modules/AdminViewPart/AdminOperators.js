@@ -3,6 +3,7 @@ import './AdminMailDepartments.css'
 import { axiosInstance } from '../../api.config';
 import useAuth from '../../hooks/useAuth';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function AdminOperators() {
     const [operators, setOperators] = useState([{}]);
@@ -25,6 +26,7 @@ export default function AdminOperators() {
     return (
         <div className="admin-operators"> 
             <h1>Операторы нашей сети</h1>
+            <button><Link to ="/admin/registryOperator">Добавить оператора</Link></button>
             <table>
                 <tr>
                     <th>ID</th>

@@ -22,9 +22,7 @@ export default function AdminMailDepartments() {
         })  
     }, []) 
 
-    function routeToRegistryMailDepartment(e) {
-        e.preventDefault();
-    }
+
 
     return (
         <div className="admin-mail-departments">
