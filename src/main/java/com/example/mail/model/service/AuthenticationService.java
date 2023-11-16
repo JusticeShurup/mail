@@ -8,6 +8,7 @@ import com.example.mail.model.domain.AuthenticationRequest;
 import com.example.mail.model.domain.User;
 import com.example.mail.model.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -35,7 +36,7 @@ public class AuthenticationService {
                 .build();
     }
 
-    public User registerAndReturnUser(RegisterRequest request) { // Function to register user used for backend queries
+    public User registerAndReturnUser(RegisterRequest request) throws DataIntegrityViolationException { // Function to register user used for backend queries
         var user = buildUser(request);
 
 

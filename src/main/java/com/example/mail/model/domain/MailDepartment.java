@@ -2,6 +2,7 @@ package com.example.mail.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class MailDepartment {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     private long id;
-    @Column(name = "index", nullable = false)
+    @Column(name = "index", nullable = false, unique = true)
     private String index;
     @Column(name = "name", nullable = false)
     private String name;
